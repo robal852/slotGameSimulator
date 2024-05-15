@@ -1,6 +1,7 @@
 Welcome to the Slot Game Simulator repository!
 
 This project is a simulator of the slot machine game based on https://wazdan.com/games/hot-slot-777-crown
+
 The game is 5-reel slot machine with
 - 3 rows of symbols.
 - 20 winning lines
@@ -9,6 +10,7 @@ The game is 5-reel slot machine with
 
 Usage:
 To run the simulator, you can use the following command line arguments:
+
   ./slotGameSimulator -gamesCount 100000 -startCredit 5000000 -creditOutFile output.txt
 
 This command will:
@@ -17,10 +19,12 @@ This command will:
 - Display a summary report on the standard console
 
 Additionally, you can use the -symbols option to check the payout for a specific combination. For example:
+
   ./slotGameSimulator -symbols 0,1,2,3,4,5,5,5,5,5,6,6,6,6,6
 
 Generating Plot:
 There's a script available for generating a plot from the data saved by the program. To use the script:
+
   python drawAPlot.py <file_path>
 
 
