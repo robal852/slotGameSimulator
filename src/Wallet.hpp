@@ -1,22 +1,22 @@
 #pragma once
+
 #include <cstdint>
 #include <cstddef>
 
 
-class Wallet
-{
+class Wallet {
 public:
-	explicit Wallet(uint64_t startCredit);
+    explicit Wallet(uint64_t startCredit);
 
-	void setCredits(uint64_t newCredits);
+    void setCredits(uint64_t newCredits);
 
-	void addCredits(uint64_t amount);
+    void addCredits(uint64_t amount);
 
     bool chargeBet(size_t numOfBets = 1);
 
-	uint64_t getCredits() const;
+    uint64_t getCredits() const;
 
 private:
-	uint64_t credits;
+    uint64_t credits;
 };
 

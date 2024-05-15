@@ -8,31 +8,32 @@
 
 class Drum {
 public:
-	Drum(RandomGenerator randomGenerator); //Construct drum with random values in rollers
+    Drum(RandomGenerator randomGenerator); //Construct drum with random values in rollers
 
-	Drum(RandomGenerator randomGenerator, const std::vector<std::vector<FruitType>> rollersSetting); //Construct drum with given rollers setting
+    Drum(RandomGenerator randomGenerator,
+         const std::vector<std::vector<FruitType>> rollersSetting); //Construct drum with given rollers setting
 
-	void setValue(int row, int col, FruitType value);
+    void setValue(int row, int col, FruitType value);
 
-	void displayContent() const;
+    void displayContent() const;
 
-	void spinRollers();
+    void spinRollers();
 
-	void showRetrievedValues() const;
+    void showRetrievedValues() const;
 
-	std::vector<FruitType> getRetrievedValues() const;
+    std::vector<FruitType> getRetrievedValues() const;
 
-	std::vector<std::vector<FruitType>> getRollers() const;
+    std::vector<std::vector<FruitType>> getRollers() const;
 
 
 private:
-	void generateRandomContent();
+    void generateRandomContent();
 
-	std::vector<FruitType> retrieveValuesFromRollers();
+    std::vector<FruitType> retrieveValuesFromRollers();
 
-	RandomGenerator randomGenerator;
-	std::vector<std::vector<FruitType>> rollers;
-	std::vector<FruitType> retrievedValues;
+    RandomGenerator randomGenerator;
+    std::vector<std::vector<FruitType>> rollers;
+    std::vector<FruitType> retrievedValues;
 
 };
 

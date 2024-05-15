@@ -49,7 +49,8 @@ int WinningLinesChecker::calculateScatterWinnings() const {
     } else if (numOfScatter == 3) {
         return 200;
     } else if (numOfScatter > 5) {
-        std::cout << "WinningLinesChecker::calculateScatterWinnings Warning: too many scatterers drawn, numOfScatter = " << numOfScatter << std::endl;
+        std::cout << "WinningLinesChecker::calculateScatterWinnings Warning: too many scatterers drawn, numOfScatter = "
+                  << numOfScatter << std::endl;
         return 5000; //Should not happen but for now treat it like in the case of 5 scatters
     }
     return 0;

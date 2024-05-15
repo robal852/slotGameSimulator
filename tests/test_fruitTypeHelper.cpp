@@ -87,9 +87,9 @@ TEST(RollersSetupTest, ValidSetupTest) {
     {
         std::vector<std::vector<FruitType>> validSetup = {
                 {FruitType::Scatter, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
-                        FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
-                        FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
-                        FruitType::Orange, FruitType::Orange, FruitType::Scatter, FruitType::Orange, FruitType::Orange},
+                 FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
+                 FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
+                 FruitType::Orange, FruitType::Orange, FruitType::Scatter, FruitType::Orange, FruitType::Orange},
 
         };
 
