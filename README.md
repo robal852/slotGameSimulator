@@ -1,4 +1,4 @@
-Welcome to the Slot Game Simulator repository!
+Welcome to the slotGameSimulator repository!
 
 This project is a simulator of the slot machine game based on https://wazdan.com/games/hot-slot-777-crown
 
