@@ -77,8 +77,8 @@ int WinningLinesChecker::calculateLineWinnings() const {
             auto payout = payouts.find({fruit, consecutiveCount});
             if (payout != payouts.end()) {
                 totalWinnings += payout->second;
-            }else{
-                std::cerr << "WinningLinesChecker::calculateScatterWinnings: Warning payout not found"<< std::endl;
+            } else {
+                std::cerr << "WinningLinesChecker::calculateScatterWinnings: Warning payout not found" << std::endl;
             }
         }
     }

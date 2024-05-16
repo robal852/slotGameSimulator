@@ -200,13 +200,14 @@ std::vector<std::vector<FruitType>> GameSimulator::findProperRollersSetup(double
         newGenerationHF = indicators.second;
 
         // if so it is used to the next generation
-        if (std::abs(RTPtarget - newGenerationRTP) < std::abs(RTPtarget - RTP) ||
+        if (std::abs(RTPtarget - newGenerationRTP) < std::abs(RTPtarget - RTP))/* ||
             (epsilon > std::abs(RTPtarget - newGenerationRTP) &&
-             std::abs(HFtarget - newGenerationHF) < std::abs(HFtarget - HF))) {
+             std::abs(HFtarget - newGenerationHF) < std::abs(HFtarget - HF))) */{
             drum = newGenerationDrum;
             RTP = newGenerationRTP;
             HF = newGenerationHF;
             generation++;
+            drum.displayContent();
         }
 
         std::cout << "iteration = " << i << " generation = " << generation << ", RTP = " << RTP << ", HF = " << HF

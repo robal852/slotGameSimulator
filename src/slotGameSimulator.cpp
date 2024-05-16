@@ -38,8 +38,6 @@ void processSymbolsArgument(const std::string &symbols_str) {
 }
 
 
-
-
 int main(int argc, char *argv[]) {
     if (argc == 3) {
         std::string arg(argv[1]);
@@ -104,11 +102,11 @@ int main(int argc, char *argv[]) {
     //You can find the expansion of the abbreviations in the file FruitTypeHelper.hpp
     //From the requirements there can be at most 5 drawn scatters so there should be a distance of at least 3 between scatterers
     std::string code = R"(
-		O 7 L O O C C W W P 7 7 7 P S 7 C L S P
-		W 7 S L W G C P W 7 L W P C W O L G O C
-		G W S P O L S O G W S L O W L C C P C S
-		C G L O 7 C G O 7 G P P L C P S O L P S
-		G P G C O C C C C O L P W S O L O O P P)";
+S P P O L O W C S O C P S O O C 7 W L G C P P O L O W C C O C P C O O C 7 W L G
+C S G C P G O L 7 7 O 7 W G L L S P O W C C G C P G O L 7 7 O 7 W G L L G P O W
+W C S O O C L G G S P 7 S 7 L L L 7 L O W C C O O P L G G C P 7 C P L L L 7 L O
+G W L L 7 C O G L G C W C C L S 7 O C P G W L L 7 C O G L G C W C C L C 7 O C P
+G P C 7 O L C S L 7 L P P P W G O G C W G P C 7 O L C C L 7 L P P P W G O G C W )";
 
     std::vector<std::vector<FruitType>> rollersSetup = FruitTypeHelper::decodeFruits(code);
 
