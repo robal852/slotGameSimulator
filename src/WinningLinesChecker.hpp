@@ -29,7 +29,6 @@ private:
 
     std::vector<FruitType> drawnValues;
     std::vector<std::vector<FruitType>> lines; // 20 winning lines
-    std::map<std::pair<FruitType, size_t>, int> payouts; //values of the winnings for the pairs - fruit, occurrences
 };
 
 /*

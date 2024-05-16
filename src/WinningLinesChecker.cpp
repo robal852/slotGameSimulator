@@ -2,53 +2,13 @@
 #include <functional>
 #include "Definitions.hpp"
 
+
+extern std::map<std::pair<FruitType, size_t>, int> fruitCounter;
+
 WinningLinesChecker::WinningLinesChecker(std::vector<FruitType> drawnValues) : drawnValues(drawnValues) {
     for (int i = 0; i < 20; ++i) {
         lines.push_back(getLineForIndex(i));
     }
-
-    //rewards for a given outcome
-    payouts[{FruitType::Scatter, 5}] = 5000;
-    payouts[{FruitType::Scatter, 4}] = 1000;
-    payouts[{FruitType::Scatter, 3}] = 200;
-    payouts[{FruitType::Scatter, 2}] = 0;
-    payouts[{FruitType::Scatter, 1}] = 0;
-    payouts[{FruitType::Scatter, 0}] = 0;
-    payouts[{FruitType::Seven, 5}] = 25000;
-    payouts[{FruitType::Seven, 4}] = 5000;
-    payouts[{FruitType::Seven, 3}] = 500;
-    payouts[{FruitType::Seven, 2}] = 0;
-    payouts[{FruitType::Seven, 1}] = 0;
-    payouts[{FruitType::Watermelon, 5}] = 2500;
-    payouts[{FruitType::Watermelon, 4}] = 1000;
-    payouts[{FruitType::Watermelon, 3}] = 250;
-    payouts[{FruitType::Watermelon, 2}] = 0;
-    payouts[{FruitType::Watermelon, 1}] = 0;
-    payouts[{FruitType::Grape, 5}] = 2500;
-    payouts[{FruitType::Grape, 4}] = 1000;
-    payouts[{FruitType::Grape, 3}] = 250;
-    payouts[{FruitType::Grape, 2}] = 0;
-    payouts[{FruitType::Grape, 1}] = 0;
-    payouts[{FruitType::Plum, 5}] = 1000;
-    payouts[{FruitType::Plum, 4}] = 250;
-    payouts[{FruitType::Plum, 3}] = 100;
-    payouts[{FruitType::Plum, 2}] = 0;
-    payouts[{FruitType::Plum, 1}] = 0;
-    payouts[{FruitType::Orange, 5}] = 1000;
-    payouts[{FruitType::Orange, 4}] = 250;
-    payouts[{FruitType::Orange, 3}] = 100;
-    payouts[{FruitType::Orange, 2}] = 0;
-    payouts[{FruitType::Orange, 1}] = 0;
-    payouts[{FruitType::Lemon, 5}] = 1000;
-    payouts[{FruitType::Lemon, 4}] = 250;
-    payouts[{FruitType::Lemon, 3}] = 100;
-    payouts[{FruitType::Lemon, 2}] = 0;
-    payouts[{FruitType::Lemon, 1}] = 0;
-    payouts[{FruitType::Cherry, 5}] = 1000;
-    payouts[{FruitType::Cherry, 4}] = 250;
-    payouts[{FruitType::Cherry, 3}] = 100;
-    payouts[{FruitType::Cherry, 2}] = 25;
-    payouts[{FruitType::Cherry, 1}] = 0;
 };
 
 
@@ -62,8 +22,12 @@ int WinningLinesChecker::calculateWinnings() const {
 int WinningLinesChecker::calculateScatterWinnings() const {
     int numOfScatter = countScatterOccurrences();
     std::pair<FruitType, size_t> scatterKey = {FruitType::Scatter, numOfScatter};
-    auto scatterpayout = payouts.find(scatterKey);
-    return scatterpayout->second;
+    auto scatterPayout = PAYOUTS.find(scatterKey);
+    auto payoutValue = scatterPayout->second;
+    if (payoutValue) {
+        fruitCounter[scatterKey]++;
+    }
+    return payoutValue;
 }
 
 //For each of the 20 lines, I check how many fruits starting from the first are repeated
@@ -73,10 +37,15 @@ int WinningLinesChecker::calculateLineWinnings() const {
         if (!line.empty()) {
             FruitType fruit = line[0];
             size_t consecutiveCount = countConsecutiveSameElements(line);
+            std::pair<FruitType, size_t> fruitKey = {fruit, consecutiveCount};
             //takes the appropriate value of the winnings from the hardcoded map
-            auto payout = payouts.find({fruit, consecutiveCount});
-            if (payout != payouts.end()) {
-                totalWinnings += payout->second;
+            auto payout = PAYOUTS.find({fruit, consecutiveCount});
+            if (payout != PAYOUTS.end()) {
+                auto payoutValue = payout->second;
+                if (payoutValue) {
+                    fruitCounter[fruitKey]++;
+                    totalWinnings += payoutValue;
+                }
             } else {
                 std::cerr << "WinningLinesChecker::calculateScatterWinnings: Warning payout not found" << std::endl;
             }

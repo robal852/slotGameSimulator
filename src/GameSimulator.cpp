@@ -6,6 +6,8 @@
 #include "FruitTypeHelper.hpp"
 #include <iomanip>
 
+extern std::map<std::pair<FruitType, size_t>, int> fruitCounter;
+
 GameSimulator::GameSimulator(RandomGenerator rG, uint64_t gamesCount, uint64_t startCredit, std::string creditOutFile)
         : randomGenerator(rG), gamesCount(gamesCount), startCredit(startCredit),
           creditOutFile(std::move(creditOutFile)), wallet(startCredit), drum(randomGenerator) {
@@ -31,13 +33,13 @@ void GameSimulator::runSimulation() {
 
     //keeps sum and count for each range
     std::map<std::pair<int, int>, std::pair<uint64_t, uint64_t>> rangeCounters = {
-            {{1,    25},    {0, 0}},
-            {{26,   100},   {0, 0}},
-            {{101,  200},   {0, 0}},
-            {{201,  300},   {0, 0}},
-            {{301,  1000},  {0, 0}},
-            {{1001, 5000},  {0, 0}},
-            {{5001, 10000}, {0, 0}}
+            {{1,    25},     {0, 0}},
+            {{26,   100},    {0, 0}},
+            {{101,  200},    {0, 0}},
+            {{201,  300},    {0, 0}},
+            {{301,  1000},   {0, 0}},
+            {{1001, 5000},   {0, 0}},
+            {{5001, 100000}, {0, 0}}
     };
 
 
@@ -103,13 +105,13 @@ void GameSimulator::printReport(uint64_t winsSum, uint64_t hits, uint64_t played
     std::cout << "Bet of each game: " << BET << "\n";
     std::cout << "Bets sum: " << playedGames << " * " << BET << " = " << betsSum << "\n\n";
     std::cout << "Distribution of wins (percentage of winning games in typical ranges):\n";
-    std::cout << std::left << setw11 << "range" << setw11 << "count" << setw11 << "count %"
+    std::cout << std::left << std::setw(12) << "range" << setw11 << "count" << setw11 << "count %"
               << setw11 << "value" << setw11 << "value %" << "\n";
 
     for (const auto &entry: rangeCounters) {
         auto range = entry.first;
         auto count = entry.second;
-        std::cout << std::left << setw11 << (std::to_string(range.first) + "-" + std::to_string(range.second))
+        std::cout << std::left << std::setw(12) << (std::to_string(range.first) + "-" + std::to_string(range.second))
                   << setw11 << count.first << setw11 << std::fixed << std::setprecision(2)
                   << static_cast<double>(count.first) / hits * 100 << " " << setw11 << count.second
                   << setw11 << std::fixed << std::setprecision(2)
@@ -119,7 +121,32 @@ void GameSimulator::printReport(uint64_t winsSum, uint64_t hits, uint64_t played
 
     std::cout << "\nThe highest win = " << highestWin << "\n";
     std::cout << "RTP = " << RTP << std::endl;
-    std::cout << "HF = " << HF << std::endl;
+    std::cout << "HF = " << HF << std::endl << std::endl;
+
+
+    uint64_t numberOfAllWinningHits{0};//every line hit is considered separately
+    for (const auto &entry: fruitCounter) {
+        numberOfAllWinningHits += entry.second;
+    }
+
+
+    for (const auto &entry: fruitCounter) {
+        const auto &key = entry.first;
+        const auto &count = entry.second;
+        auto reward = PAYOUTS.find(key)->second;
+        auto oneLinewinsSum = count * reward;
+        double hitsProcentage = static_cast<double>(count) / numberOfAllWinningHits * 100;
+        double totalWinningsProcentage = static_cast<double>(oneLinewinsSum) / winsSum * 100;
+        double avgFrequencyInWinningGames = static_cast<double>(hits) / count;
+        double avgFrequencyInAll = static_cast<double>(gamesCount) / count;
+        std::cout << "FruitType: " << key.first << ", Size: " << key.second << ", Hits: " << std::setw(8) << count
+                  << ", Reward: "
+                  << std::setw(8) << reward << ", Hits %: " << std::setw(5) << hitsProcentage << ", Wins sum: "
+                  << std::setw(11) << oneLinewinsSum
+                  << ", Total winings %: " << std::setw(5) << totalWinningsProcentage << ", 1/(w): " << std::setw(8)
+                  << std::setprecision(0) << avgFrequencyInWinningGames
+                  << ", 1/(g): " << std::setw(8) << std::setprecision(0) << avgFrequencyInAll << "\n";
+    }
 }
 
 uint64_t GameSimulator::getGamesCount() const {

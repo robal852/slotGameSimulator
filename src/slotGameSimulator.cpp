@@ -10,6 +10,17 @@
 #include "FruitTypeHelper.hpp"
 #include <set>
 
+//global counter to create winnigns summary table
+std::map<std::pair<FruitType, size_t>, int> fruitCounter;
+
+void initializeFruitCounter() {
+    // Lista par do zainicjalizowania
+
+    for (const auto &pair: WINNING_PAIRS) {
+        fruitCounter[pair] = 0;
+    }
+}
+
 void processSymbolsArgument(const std::string &symbols_str) {
     std::vector<FruitType> symbols;
     std::stringstream ss(symbols_str);
@@ -111,6 +122,7 @@ G P C 7 O L C S L 7 L P P P W G O G C W G P C 7 O L C C L 7 L P P P W G O G C W 
     std::vector<std::vector<FruitType>> rollersSetup = FruitTypeHelper::decodeFruits(code);
 
     if (FruitTypeHelper::isRollersSetupValid(rollersSetup)) {
+        initializeFruitCounter();
         RandomGenerator randomGenerator{};
         GameSimulator simulator(randomGenerator, gamesCount, startCredit, creditOutFile, rollersSetup);
 
