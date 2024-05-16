@@ -139,13 +139,14 @@ void GameSimulator::printReport(uint64_t winsSum, uint64_t hits, uint64_t played
         double totalWinningsProcentage = static_cast<double>(oneLinewinsSum) / winsSum * 100;
         double avgFrequencyInWinningGames = static_cast<double>(hits) / count;
         double avgFrequencyInAll = static_cast<double>(gamesCount) / count;
-        std::cout << "FruitType: " << key.first << ", Size: " << key.second << ", Hits: " << std::setw(8) << count
-                  << ", Reward: "
-                  << std::setw(8) << reward << ", Hits %: " << std::setw(5) << hitsProcentage << ", Wins sum: "
-                  << std::setw(11) << oneLinewinsSum
-                  << ", Total winings %: " << std::setw(5) << totalWinningsProcentage << ", 1/(w): " << std::setw(8)
-                  << std::setprecision(0) << avgFrequencyInWinningGames
-                  << ", 1/(g): " << std::setw(8) << std::setprecision(0) << avgFrequencyInAll << "\n";
+        std::cout << "FruitType: " << key.first << ", Size: " << key.second
+                  << ", Hits: " << std::setw(8) << count
+                  << ", Reward: " << std::setw(8) << reward
+                  << ", Hits %: " << std::setw(5) << hitsProcentage
+                  << ", Wins sum: " << std::setw(11) << oneLinewinsSum
+                  << ", Total winings %: " << std::setw(5) << totalWinningsProcentage
+                  << ", 1/(w): " << std::setw(8) << avgFrequencyInWinningGames
+                  << ", 1/(g): " << std::setw(8) << avgFrequencyInAll << "\n";
     }
 }
 
