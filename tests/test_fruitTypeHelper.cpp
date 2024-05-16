@@ -125,6 +125,10 @@ TEST(RollersSetupTest, InvalidSetupTest) {
                 {FruitType::Scatter, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
                  FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
                  FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
+                 FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
+                 FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
+                 FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
+                 FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange,
                  FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Orange, FruitType::Scatter},
 
         };
