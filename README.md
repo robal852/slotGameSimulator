@@ -31,6 +31,9 @@ There's a script available for generating a plot from the data saved by the prog
   python drawAPlot.py <file_path>
 
 
+
 Requirements:
+
 The simulator is written in C++17 and utilizes Google Test
+
 The plotting script is written in Python and requires matplotlib library.
